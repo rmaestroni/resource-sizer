@@ -1,0 +1,36 @@
+{
+  "name": "resource-sizer",
+  "version": "0.0.1",
+  "description": "This server computes the Content-Length of the supplied resources",
+  "author": {
+    "name": "Roberto Maestroni",
+    "email": "r.maestroni@gmail.com"
+  },
+  "contributors": [{}],
+  "bin": {
+    "resource-sizer": "./index.js"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmaestroni/resource-sizer.git"
+  },
+  "bugs": {},
+  "keywords": [],
+  "dependencies": {
+    "async": ">=0.9.0",
+    "express": ">=4.10.5",
+    "body-parser": ">=1.10.0"
+  },
+  "devDependencies": {
+    "mocha": ">=2.0.1",
+    "expect.js": ">=0.3.1"
+  },
+  "preferGlobal": true,
+  "private": true,
+  "publishConfig": {},
+  "license": "GPL v2"
+}
