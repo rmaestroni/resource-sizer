@@ -66,7 +66,12 @@ Server = (function() {
     this.urlLib = urlLib
     this.httpLib = httpLib
     this.async = asyncLib
-    this.urls = urls
+    if (urls instanceof Array) {
+      this.urls = urls
+    }
+    else {
+      this.urls = [urls]
+    }
   }
 
   Server.prototype.processRequest = function(request, response) {
@@ -118,12 +123,12 @@ app.use(bodyParser.json())
 
 
 app.get('/', function(request, response) {
-  var urls = request.query['urls'] || []
+  var urls = request.query['urls'] || request.query['urls[]'] || []
   new Server(URL, http, async, urls).processRequest(request, response)
 })
 
 app.post('/', function(request, response) {
-  var urls = request.body['urls'] || []
+  var urls = request.body['urls'] || request.body['urls[]'] || []
   new Server(URL, http, async, urls).processRequest(request, response)
 })
 
