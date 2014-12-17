@@ -108,19 +108,17 @@ Server = (function() {
 })()
 
 
-/**
- * Module dependencies.
- */
+// Module dependencies.
 var http = require('http')
 var URL = require('url')
 var async = require('async')
 var express = require('express')
 var bodyParser = require('body-parser')
 
+// Init Express application
 var app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
 
 app.get('/', function(request, response) {
   var urls = request.query['urls'] || request.query['urls[]'] || []
@@ -132,7 +130,11 @@ app.post('/', function(request, response) {
   new Server(URL, http, async, urls).processRequest(request, response)
 })
 
-var server = app.listen(8081, function() {
+// Get command line options via minimist
+var argv = require('minimist')(process.argv.slice(2))
+
+// Run http server
+var server = app.listen(argv.port || 8081, function() {
   var host = server.address().address
   var port = server.address().port
   console.log('Server listening at http://%s:%s', host, port)
