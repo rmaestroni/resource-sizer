@@ -115,10 +115,18 @@ var async = require('async')
 var express = require('express')
 var bodyParser = require('body-parser')
 
+// General error handler
+var errorHandler = function(err, req, res, next) {
+  res.writeHead(500, { 'Content-Type': 'application/json' })
+  res.write(JSON.stringify({ error: err.toString() }))
+  res.end()
+}
+
 // Init Express application
 var app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(errorHandler) // must be the last middleware registered
 
 app.get('/', function(request, response) {
   var urls = request.query['urls'] || request.query['urls[]'] || []
